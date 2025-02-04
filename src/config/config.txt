@@ -1,0 +1,13 @@
+
+  This `config.json` file stores environment-specific settings for your application. Each environment 
+ (`development`, `test`, `production`) has its own configuration:
+
+ - **`queryCacheTimeMs`**: Specifies how long data should be cached in milliseconds
+  (e.g., 60 seconds for development, 30 seconds for testing, 120 seconds for production).
+
+ - **`refreshQueriesOnWindowFocus`**: Determines whether data should refetch when the app window regains focus 
+ (`true` for development/production, `false` for testing).
+
+ This file ensures that environment-specific behavior is centralized, making the app easier to configure and maintain across different stages of the development lifecycle."
+
+
