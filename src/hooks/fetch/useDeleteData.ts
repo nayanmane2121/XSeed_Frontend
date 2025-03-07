@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { apiHandler, ID_PLACEHOLDER } from "@/api/apiHandler";
+import { apiHandler, buildEndpointUrl } from "@/api/apiHandler";
 
-export const useDeleteData = (apiEndPoint: string, id: number | string) => {
-  const url = apiEndPoint.replace(ID_PLACEHOLDER, id.toString());
+export const useDeleteData = (apiEndPoint: string) => {
   return useMutation({
-    mutationFn: async (): Promise<void> => {
+    mutationFn: async (ids: (string | number)[]): Promise<void> => {
+      const url = buildEndpointUrl(ids, apiEndPoint); // Dynamically replace placeholders
       return await apiHandler<void>("DELETE", url);
     },
   });

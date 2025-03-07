@@ -50,8 +50,7 @@ export default function CandidateLoginPage() {
       <Title text="Welcome back" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormInputField control={form.control} name="email" label="Email" placeholder="Enter your email" required />
-
+ 
           <FormInputField
             control={form.control}
             name="password"

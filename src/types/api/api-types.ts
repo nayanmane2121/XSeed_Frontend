@@ -11,48 +11,55 @@ const apiPaymentSettlementCoreBaseUrl = useMockData ? "" : process.env.NEXT_PUBL
 
 // Define API endpoints
 export const ApiEndPoint = {
+
+  GET_INTERVIEW_AI_POWERED_USER_INTERVIEW_DATA: "/interview/ai-powered/user/{id}/interview/{id}",
+  GET_INTERVIEW_STEPS_SEARCH: "/interview-steps/search",
+  GET_INTERVIEW_TOPICS_SEARCH: "/interview-topics/{id}/search", // stepId
+  GET_INTERVIEW_SUBTOPICS_SEARCH: "/interview-subtopics/{id}/{id}/search" , //${stepId}/${topicId}
+  POST_INTERVIEW_SCHEDULED_AI_POWERED_USER_INTERVIEW: "/interview-scheduled/ai-powered/user/{id}/interview/{id}",
+
   // LOGIN: `${apiBillingAuthenticationBaseUrl}/auth/login`,
   // LOGOUT: `${apiBillingAuthenticationBaseUrl}/auth/logout`,
   // REFRESH_TOKEN: `${apiBillingAuthenticationBaseUrl}/auth/refresh-token`,
   // FORGOT_PASSWORD: `${apiBillingAuthenticationBaseUrl}/auth/forgot-password`,
   // RESET_PASSWORD: `${apiBillingAuthenticationBaseUrl}/auth/reset-password`,
-  LOGIN: "/auth/login",
-  LOGOUT: "/auth/logout",
-  REFRESH_TOKEN: "/auth/refresh-token",
-  FORGOT_PASSWORD: "/auth/forgot-password",
-  RESET_PASSWORD: "/auth/reset-password",
-  GET_ALL_JOBS: "/all-jobs",
-  GET_JOB_BY_ID: "/jobs/{id}",
-  CREATE_JOB: "/jobs/create",
-  UPDATE_JOB: "/jobs/{id}/update",
-  DELETE_JOB: "/jobs/{id}/delete",
-  
-  GET_JOBS_SUGGESTED_CANDIDATES: "/jobs/{id}/suggested-candidates",
-  GET_JOBS_ALL_SUGGESTED_CANDIDATES: "/jobs/{id}/all-suggested-candidates",
-  UPDATE_JOBS_ASSOCIATE_CANDIDATES: "/jobs/{id}/associate-candidates",
+  // LOGIN: "/auth/login",
+  // LOGOUT: "/auth/logout",
+  // REFRESH_TOKEN: "/auth/refresh-token",
+  // FORGOT_PASSWORD: "/auth/forgot-password",
+  // RESET_PASSWORD: "/auth/reset-password",
+  // GET_ALL_JOBS: "/all-jobs",
+  // GET_JOB_BY_ID: "/jobs/{id}",
+  // CREATE_JOB: "/jobs/create",
+  // UPDATE_JOB: "/jobs/{id}/update",
+  // DELETE_JOB: "/jobs/{id}/delete",
 
+  // GET_JOBS_SUGGESTED_CANDIDATES: "/jobs/{id}/suggested-candidates",
+  // GET_JOBS_ALL_SUGGESTED_CANDIDATES: "/jobs/{id}/all-suggested-candidates",
+  // UPDATE_JOBS_ASSOCIATE_CANDIDATES: "/jobs/{id}/associate-candidates",
 
+  // // job - pipeline
+  // GET_INTERNVIEW_QUESTIONS_BY_STEPS_TOPICS: "/interview-questions/steps/{id}/topics/{id}",
+  // DELETE_INTERVIEW_QUESTION : "interview-questions/steps/{id}/topics/{id}/questions/{id}" ,
 
-  
-  GET_ALL_CANDIDATES: "/candidates",
-  GET_CANDIDATE_BY_ID: "/candidates/{id}",
-  CREATE_CANDIDATE: "/candidates/create",
-  UPDATE_CANDIDATE: "/candidates/{id}/upladate",
-  DELETE_CANDIDATE: "/candidates/{id}/delete",
+  // GET_ALL_CANDIDATES: "/candidates",
+  // GET_CANDIDATE_BY_ID: "/candidates/{id}",
+  // CREATE_CANDIDATE: "/candidates/create",
+  // UPDATE_CANDIDATE: "/candidates/{id}/upladate",
+  // DELETE_CANDIDATE: "/candidates/{id}/delete",
 
-  GET_CUSTOMER_DETAILS: "/customers/{id}/details",
-  UPDATE_CUSTOMER: "/customers/{id}/update",
-  DELETE_CUSTOMER: "/customers/{id}/delete",
-  GET_ALL_CUSTOMERS: "/customers",
-  CREATE_CUSTOMER: "/customers/create",
-  GET_USER_PROFILE: "/users/{id}/profile",
-  UPDATE_USER_PROFILE: "/users/{id}/update",
-  GET_ALL_USERS: "/users",
-  CREATE_USER: "/users/create",
-  DELETE_USER: "/users/{id}/delete"
+  // GET_CUSTOMER_DETAILS: "/customers/{id}/details",
+  // UPDATE_CUSTOMER: "/customers/{id}/update",
+  // DELETE_CUSTOMER: "/customers/{id}/delete",
+  // GET_ALL_CUSTOMERS: "/customers",
+  // CREATE_CUSTOMER: "/customers/create",
+  // GET_USER_PROFILE: "/users/{id}/profile",
+  // UPDATE_USER_PROFILE: "/users/{id}/update",
+  // GET_ALL_USERS: "/users",
+  // CREATE_USER: "/users/create",
+  // DELETE_USER: "/users/{id}/delete"
   // Add other endpoints as needed
 } as const;
-
 
 // Type for API endpoints
 export type ApiEndPoint = (typeof ApiEndPoint)[keyof typeof ApiEndPoint];
@@ -65,18 +72,18 @@ export type ApiResult<T> = {
 };
 
 // Define API response structure
-export type ApiResponse<T> = {
-  responseData: T;
-};
+// export type ApiResponse<T> = {
+//   responseData: T;
+// };
 
 // Define paginated API response
 
-export type PaginatedApiResponse<T> =  {
+export type PaginatedApiResponse<T> = {
   responseData: T[];
   totalCount: number;
   totalPages: number;
   currentPage: number;
-}
+};
 
 // Define API request type
 export type ApiRequest = {

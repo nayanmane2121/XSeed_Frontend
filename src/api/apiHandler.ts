@@ -1,14 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { baseUrl } from "@/config";
 import axios, { AxiosRequestConfig } from "axios";
 
 export const ID_PLACEHOLDER = "{id}";
 
 export const buildEndpointUrl = (ids: ApiIds, apiEndPoint: string): string => {
-  const allIds = Array.isArray(ids) ? ids : [ids];
-  const numberIds = allIds.map((currentId) => (typeof currentId === "string" ? parseInt(currentId, 10) : currentId));
+  if (typeof apiEndPoint !== "string") {
+    throw new Error("apiEndPoint must be a string");
+  }
 
-  return numberIds.reduce((accUrl, currentId) => accUrl.replace(ID_PLACEHOLDER, currentId.toString()), apiEndPoint);
+  const allIds = Array.isArray(ids) ? ids.map((id) => (typeof id === "string" ? id : id.toString())) : [ids];
+
+  return allIds.reduce((accUrl: string, currentId) => {
+    const idAsString = typeof currentId === "string" ? currentId : currentId.toString(); // Ensure it's always a string
+
+    return accUrl.replace(ID_PLACEHOLDER, idAsString);
+  }, apiEndPoint);
+};
+
+export const buildCacheKey = (ids: ApiIds, cacheKeyTemplate: string): string => {
+  const allIds = Array.isArray(ids) ? ids : [ids];
+
+  return allIds.reduce((accUrl: string, currentId) => {
+    const idAsString = typeof currentId === "number" || !isNaN(Number(currentId)) ? currentId.toString() : String(currentId); // Ensure ID is always a string
+
+    return accUrl.replace(ID_PLACEHOLDER, idAsString);
+  }, cacheKeyTemplate);
 };
 
 export const buildUrlWithFilters = (ids: ApiIds, apiEndPoint: string, filters?: Record<string, unknown>): string => {
@@ -34,11 +50,14 @@ export const buildUrlWithFilters = (ids: ApiIds, apiEndPoint: string, filters?: 
 
 export type ApiIds = number | string | (number | string)[];
 
+
 const api = axios.create({
-  baseURL: baseUrl,
-  withCredentials: true,
+  baseURL: "/api" ,// baseURL
+  // withCredentials: true,
   headers: {
-    "Content-Type": "application/json"
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true" // Disable ngrok warning and errors
   }
 });
 
